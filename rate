@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Courier Rate Calculator - Nex Gen Courier</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f5f5f5;
+    }
+    h2 {
+      color: #333;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    select, button {
+      padding: 8px;
+      width: 100%;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Courier Rate Calculator</h2>
+
+    <label for="zone">Select Zone:</label>
+    <select id="zone">
+      <option value="A">Zone A (Local)</option>
+      <option value="B">Zone B (0–500 km)</option>
+      <option value="C">Zone C (Metro–Metro 501–1400 km)</option>
+      <option value="D">Zone D (Metro–Metro 1401–2500 km)</option>
+      <option value="E">Zone E (Metro–Others 501–1400 km)</option>
+      <option value="F">Zone F (Metro–Others 1401–2500 km)</option>
+      <option value="G">Zone G (NE, J&K, >2500 km)</option>
+      <option value="H">Zone H (Super Special)</option>
+    </select>
+
+    <label for="weight">Select Weight:</label>
+    <select id="weight">
+      <option value="0.5">0.5 kg</option>
+      <option value="2">2 kg</option>
+      <option value="5">5 kg</option>
+      <option value="10">10 kg</option>
+      <option value="15">15 kg</option>
+      <option value="20">20 kg</option>
+      <option value="25">25 kg</option>
+      <option value="30">30 kg</option>
+      <option value="35">35 kg</option>
+      <option value="40">40 kg</option>
+      <option value="45">45 kg</option>
+      <option value="50">50 kg</option>
+    </select>
+
+    <button onclick="calculateRate()">Calculate Rate</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const rateTable = {
+      "0.5": { A: 28, B: 30, C: 32, D: 34, E: 36, F: 40, G: 44, H: 46 },
+      "2":   { A: 53, B: 56, C: 60, D: 64, E: 68, F: 75, G: 83, H: 86 },
+      "5":   { A: 126, B: 135, C: 144, D: 153, E: 162, F: 180, G: 198, H: 207 },
+      "10":  { A: 224, B: 240, C: 256, D: 272, E: 288, F: 320, G: 352, H: 368 },
+      "15":  { A: 305, B: 326, C: 348, D: 370, E: 392, F: 435, G: 479, H: 500 },
+      "20":  { A: 385, B: 413, C: 440, D: 468, E: 495, F: 550, G: 605, H: 633 },
+      "25":  { A: 466, B: 499, C: 532, D: 565, E: 599, F: 665, G: 732, H: 765 },
+      "30":  { A: 525, B: 563, C: 600, D: 638, E: 675, F: 750, G: 825, H: 863 },
+      "35":  { A: 560, B: 600, C: 640, D: 680, E: 720, F: 800, G: 880, H: 920 },
+      "40":  { A: 613, B: 656, C: 700, D: 744, E: 788, F: 875, G: 963, H: 1006 },
+      "45":  { A: 641, B: 686, C: 732, D: 778, E: 824, F: 915, G: 1007, H: 1052 },
+      "50":  { A: 665, B: 713, C: 760, D: 807, E: 855, F: 950, G: 1045, H: 1093 }
+    };
+
+    function calculateRate() {
+      const zone = document.getElementById("zone").value;
+      const weight = document.getElementById("weight").value;
+      const rate = rateTable[weight][zone];
+      document.getElementById("result").innerText = `Rate: ₹${rate}`;
+    }
+  </script>
+
+</body>
+</html>
